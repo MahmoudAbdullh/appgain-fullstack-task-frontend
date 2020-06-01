@@ -15,6 +15,7 @@ import {connect} from 'react-redux'
 import {withRouter} from 'next/router'
 import {
     SetPreviewData,
+    ReSetPreviewData,
     UpdateLayout
 } from '../store/Layout/actions';
 
@@ -25,7 +26,8 @@ class UpdateLayoutClass extends Component {
         title: null,
         titleColor: null,
         titleBgColor: null,
-        slides: []
+        slides: [],
+        loading: false
     }
     componentDidMount(){
         //clear preview data
@@ -95,6 +97,7 @@ class UpdateLayoutClass extends Component {
         ){
             this.props.UpdateLayout(this.appendToFormData(this.state))
             .then(()=>{
+                this.props.ReSetPreviewData()
                 this.setState({
                     loading: false
                 })
@@ -269,8 +272,15 @@ class UpdateLayoutClass extends Component {
                                             }
                                         </Row>
                                         <div className="mt-3">
-                                            <button className="btn btn-primary btn-block waves-effect waves-light" type="submit">
-                                                Update
+                                            <button
+                                                className="btn btn-primary btn-block waves-effect waves-light"
+                                                type="submit"
+                                                disabled={this.state.loading}
+                                            >
+                                                {this.state.loading?
+                                                    "Update":
+                                                    "Updating..."
+                                                }
                                             </button>
                                         </div>
                                         <style jsx>
@@ -296,4 +306,4 @@ const mapStateToProps = (state) =>({
     preview: state.Layout.preview,
     layout: state.Layout
 })
-export default withRouter(connect(mapStateToProps,{SetPreviewData ,UpdateLayout})(UpdateLayoutClass))
+export default withRouter(connect(mapStateToProps,{SetPreviewData ,UpdateLayout, ReSetPreviewData})(UpdateLayoutClass))
