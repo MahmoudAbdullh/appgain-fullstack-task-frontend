@@ -101,6 +101,7 @@ class UpdateLayoutClass extends Component {
                 this.setState({
                     loading: false
                 })
+                window.location.href = '/'
             })
             .catch(()=>{
                 this.setState({
