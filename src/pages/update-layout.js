@@ -279,8 +279,8 @@ class UpdateLayoutClass extends Component {
                                                 disabled={this.state.loading}
                                             >
                                                 {this.state.loading?
-                                                    "Update":
-                                                    "Updating..."
+                                                    "Updating...":
+                                                    "Update"
                                                 }
                                             </button>
                                         </div>
