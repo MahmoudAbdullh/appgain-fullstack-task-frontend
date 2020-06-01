@@ -1,11 +1,11 @@
 import Link from 'next/link';
-const Nav = (props) => (
+const Nav = ({preview}) => (
   <nav>
     <ul>
       <li>
         <Link href="/">
           <a>
-            <img className="logo" src="https://res.cloudinary.com/appgain/image/upload/v1534373384/appgain/logo.png" alt="appgain-logo" />
+            <img className="logo" src={preview.logo?preview.logo.src:''} alt="appgain-logo" />
           </a>
         </Link>
       </li>

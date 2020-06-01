@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import { withRouter } from 'next/router'
-const Nav = ({router}) =>{
+import { withRouter } from 'next/router';
+import {connect} from 'react-redux';
+const Nav = ({router, Layout, handlePreviewClick}) =>{
 
   return(
     <nav>
@@ -8,17 +9,16 @@ const Nav = ({router}) =>{
         <li>
           <Link href="/">
             <a>
-              <img className="logo" src="https://res.cloudinary.com/appgain/image/upload/v1534373384/appgain/logo.png" alt="appgain-logo" />
+              <img className="logo" src={Layout.logo} alt="appgain-logo" />
             </a>
           </Link>
         </li>
         <li>
           {router.pathname === '/update-layout'?
-            <Link href="/preview" >
-              <a className="btn btn-primary">
-                preview
-              </a>
-            </Link>:
+            <button type="button" className="btn btn-primary" onClick={handlePreviewClick}>
+              preview
+            </button>
+            :
             <Link href="/update-layout" >
               <a className="btn btn-primary">
                 Update Layout
@@ -66,4 +66,7 @@ const Nav = ({router}) =>{
     </nav>
   );
 }
-export default withRouter(Nav);
+const mapStateToProps = (state) =>({
+    Layout: state.Layout
+})
+export default withRouter(connect(mapStateToProps,{})(Nav));

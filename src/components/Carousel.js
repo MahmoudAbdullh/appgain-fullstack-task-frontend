@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import dynamic from 'next/dynamic'
+
 import {
   Carousel,
   CarouselItem,
@@ -8,28 +8,19 @@ import {
   CarouselCaption
 } from 'reactstrap';
 
-const items = [
-    {
-        src: "/slider/hongkonga1280x800.jpg"
-    },
-    {
-        src: "/slider/nyc1280x800.jpg"
-    }
-];
-
 const OwlCarouselCustom = (props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
 
   const next = () => {
     if (animating) return;
-    const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
+    const nextIndex = activeIndex === props.items.length - 1 ? 0 : activeIndex + 1;
     setActiveIndex(nextIndex);
   }
 
   const previous = () => {
     if (animating) return;
-    const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
+    const nextIndex = activeIndex === 0 ? props.items.length - 1 : activeIndex - 1;
     setActiveIndex(nextIndex);
   }
 
@@ -38,7 +29,7 @@ const OwlCarouselCustom = (props) => {
     setActiveIndex(newIndex);
   }
 
-  const slides = items.map((item) => {
+  const slides = props.items.map((item) => {
     return (
       <CarouselItem
       className="custom-tag"
@@ -60,7 +51,7 @@ const OwlCarouselCustom = (props) => {
     >
 
       <CarouselIndicators
-        items={items}
+        items={props.items}
         activeIndex={activeIndex}
         onClickHandler={goToIndex}
       />

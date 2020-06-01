@@ -4,13 +4,13 @@ import { Provider } from 'react-redux'
 import { withRouter } from 'next/router';
 import withReduxStore from '../store/with-redux-store'
 import Head from '../components/head';
-
 /**
  * styles
  */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/style/style.scss'
 class MyApp extends App {
+
     render() {
         const { Component, pageProps, reduxStore } = this.props;
 
